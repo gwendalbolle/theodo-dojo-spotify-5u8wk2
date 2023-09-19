@@ -12,6 +12,11 @@ const trackUrls = [
   'https://p.scdn.co/mp3-preview/ac28d1b0be285ed3bfd8e9fa5fad133776d7cf36',
 ];
 
+const AlbumCover = ({ track }) => {
+  const src = track.track.album.images[0].url; // A changer ;)
+  return <img src={src} style={{ width: 400, height: 400 }} />;
+};
+
 const App = () => {
   const [trackIndex, setTrackIndex] = useState(0);
   const goToNextTrack = () => {
@@ -21,7 +26,7 @@ const App = () => {
     queryKey: ['tracks'],
     queryFn: fetchTracks,
   });
-  console.log(tracks);
+  let currentTrack = tracks[trackIndex];
   return (
     <div className="App">
       <header className="App-header">
@@ -31,10 +36,10 @@ const App = () => {
       <div className="App-images">
         <p> {'Il y a  ' + tracks.length + ' titres au total'} </p>
         <p>
-          {' '}
-          {'Le titre de la premiere chanson est :' +
+          {'Le titre de la premiere chanson est : ' +
             tracks[trackIndex].track.name}{' '}
         </p>
+        <AlbumCover track={currentTrack} />
         <audio src={trackUrls[trackIndex]} autoPlay controls />
         <button onClick={goToNextTrack}>Next track</button>
       </div>
