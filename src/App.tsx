@@ -21,6 +21,7 @@ const App = () => {
     queryKey: ['tracks'],
     queryFn: fetchTracks,
   });
+  console.log(tracks);
   return (
     <div className="App">
       <header className="App-header">
@@ -28,7 +29,12 @@ const App = () => {
         <h1 className="App-title">Bienvenue sur le blind test</h1>
       </header>
       <div className="App-images">
-        <p id="nbTracks"> {'Il y a  ' + tracks.length + ' titres au total'} </p>
+        <p> {'Il y a  ' + tracks.length + ' titres au total'} </p>
+        <p>
+          {' '}
+          {'Le titre de la premiere chanson est :' +
+            tracks[trackIndex].track.name}{' '}
+        </p>
         <audio src={trackUrls[trackIndex]} autoPlay controls />
         <button onClick={goToNextTrack}>Next track</button>
       </div>
